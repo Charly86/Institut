@@ -47,7 +47,7 @@
 		<tr>
 		<td>
 		
-		<form action="login" method="Post">
+		<form action="pagUsuari" method="Post">
 			<table>
 			<tr>
 			<td>Usuari:</td>

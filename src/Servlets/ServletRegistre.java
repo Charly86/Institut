@@ -1,11 +1,15 @@
 package Servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.AlumneDao;
+
 
 /**
  * Servlet implementation class ServletRegistre
@@ -33,7 +37,19 @@ public class ServletRegistre extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nomUser=request.getParameter("nomUser");
+		String password=request.getParameter("password");
+		String nom=request.getParameter("Nom");
+		int edat=Integer.parseInt(request.getParameter("Edat"));
+		String cognoms=request.getParameter("Cognoms");
 		
+	
+		
+		AlumneDao alum = new AlumneDao();
+		
+		alum.CrearAlumne(nomUser, password, nom, cognoms, edat);
+		
+		response.sendRedirect("index.jsp");
 	}
 
 }
