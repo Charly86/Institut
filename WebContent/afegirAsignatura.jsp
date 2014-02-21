@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="vo.*" %>
+     <%@ page import="vo.*" %>
 	<%@ page import="dao.*" %>
 	<%@ page import="java.io.*,java.util.*,java.sql.*"%>
 	<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
@@ -11,7 +11,7 @@
 		HttpSession sesion=request.getSession();
 		
 	//Li asigno el nom d'suari a la sesio
-		sesion.setAttribute("usuari",request.getParameter("ID"));
+		//sesion.setAttribute("usuari",request.getParameter("ID"));
 		
 		String usuari = (String)sesion.getAttribute("usuari");
 	%>
@@ -19,24 +19,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pagina personal</title>
+<title>Afegir Asignatures</title>
 </head>
 <body>
-<h3>Sistema de administración de cuentas</h3>
-
-<br>
-
-<b>Usuari: </b> <%= usuari %>
-
-Escull una opcio
-
-<li> <a href="afegirAsignatura.jsp">Afegir assignatures</a>
-
-<li> <a href="ferMatricula.jsp">Fer matricula</a>
-
-<li> <a href="llistarAlumnes.jsp">Llistar Alumnes</a>
-
-<li> <a href="sortir.jsp">Sortir</a>
-
+	<b>Usuari: </b> <%= usuari %>
+	<form action="afegirAsignatura" method="Post">
+			<table>
+			<tr>
+			<td>Nom de l'asignatura:</td>
+			<td><input type="text" size="20" name="nom"></td>
+			</tr>
+			<tr>
+			<td>credits</td>
+			<td><input type="text" size="20" name="credits"></td>
+			</tr>
+			
+			<td colspan="2" align="center"><input type="submit" value="Afegeix asignatura"></td>
+			
+			</table>
+		</form>
 </body>
 </html>

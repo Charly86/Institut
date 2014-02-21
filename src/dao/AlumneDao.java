@@ -47,7 +47,7 @@ public class AlumneDao implements IAlumne {
 		
 	}
 	
-	public void CrearAssignatura(String nom, int credits){
+	public AssignaturaVo CrearAssignatura(String nom, int credits){
 			
 			
 			AssignaturaVo assi= Factory.factoryMethod(nom,credits);
@@ -67,6 +67,7 @@ public class AlumneDao implements IAlumne {
 			            System.out.println(e.getMessage());
 			            System.out.println("Connexio incorrecta");
 			  }
+			return assi;
 		}
 	
 	public void CrearMatricula(AlumneVo alum, AssignaturaVo assign, int nota){
@@ -177,6 +178,33 @@ public class AlumneDao implements IAlumne {
 		  
 		  return alumnes;
 	}
-
+	
+	public int retornaCredits(String nom){
+		
+				int credits=0;
+				
+					//connexio amb la bd
+				  DbConnection conex= new DbConnection();
+				     
+				  try {
+					  
+				   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT credits FROM assignatures WHERE nom='" + nom + "';");
+				   
+				   ResultSet res = consulta.executeQuery();
+				   
+				   
+				   		credits=((Integer.parseInt(res.getString("credits"))));
+				   		
+				          res.close();
+				          consulta.close();
+				          conex.desconectar();
+				    
+				  } catch (Exception e) {
+					  
+				   System.out.print("No s'ha pogut fer el llistat");
+				  }
+				  
+				  return credits;
+	}
 
 }
