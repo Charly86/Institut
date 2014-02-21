@@ -47,7 +47,7 @@
 		<tr>
 		<td>
 		
-		<form action="comprovarUsuari" method="Post">
+		<form action="ComprovarUsuari" method="Post">
 			<table>
 			<tr>
 			<td>Usuari:</td>

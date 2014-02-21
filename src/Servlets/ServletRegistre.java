@@ -45,13 +45,12 @@ public class ServletRegistre extends HttpServlet {
 		int edat=Integer.parseInt(edat2);
 		String cognoms=request.getParameter("cognoms");
 		
-	
 		
 		AlumneDao alum = new AlumneDao();
 		
 		alum.CrearAlumne(nomUser, password, nom, cognoms, edat);
 		
-		response.sendRedirect("localhost:8080/Escola/index.jsp");
+		response.sendRedirect("index.jsp");
 	}
 
 }

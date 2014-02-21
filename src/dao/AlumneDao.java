@@ -20,7 +20,7 @@ public class AlumneDao implements IAlumne {
 		
 		AlumneVo a= Factory.factoryMethod(user,password,nom,cognoms,edat);
 		
-		if(this.buscarAlumne(a.getNomUser())!=null){
+		if(this.buscarAlumne(a.getNomUser())==null){
 			
 			//crear connexio
 			DbConnection conex= new DbConnection();

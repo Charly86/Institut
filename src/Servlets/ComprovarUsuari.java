@@ -63,7 +63,13 @@ public class ComprovarUsuari extends HttpServlet {
 				
 				sesionOk.setAttribute("nom",a.getNomUser());
 				
-				response.sendRedirect("pagUsuari");
+			
+				
+				response.sendRedirect("pagUsuari.jsp?ID="+a.getNomUser());
+			}
+			else{
+				response.sendRedirect("index.jsp");
+				
 			}
 	}
 
