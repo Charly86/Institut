@@ -80,8 +80,12 @@ public class AlumneDao implements IAlumne {
 				  //Preparar connexio
 			   Statement estatuto = conex.getConnection().createStatement();
 			   
+			   alum.setId(this.retornaIdAlumne(alum.getNomUser()));
+			   
+			   assign.setId(this.retornaIdAssign(assign.getNom()));
+			   
 			   //executar consulta
-			   estatuto.executeUpdate("INSERT INTO matricula (nota) VALUES ('"+m.getNota()+ "');");
+			   estatuto.executeUpdate("INSERT INTO matricula (nota,idAlum,idAssign) VALUES ('"+m.getNota()+"', '"+m.getAlumne().getId()+"', '"+m.getAssignatura().getId()+ "');");
 			   estatuto.close();
 			   conex.desconectar();
 			    
@@ -205,6 +209,68 @@ public class AlumneDao implements IAlumne {
 				  }
 				  
 				  return credits;
+	}
+	
+	public int retornaIdAlumne(String nom){
+		
+		
+			int id=0;
+			
+			//connexio amb la bd
+		  DbConnection conex= new DbConnection();
+		     
+		  try {
+			  
+		   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT idAlumnes FROM alumnes WHERE nom='" + nom + "';");
+		   
+		   ResultSet res = consulta.executeQuery();
+		   
+		   
+		   		id=((Integer.parseInt(res.getString("idAlumnes"))));
+		   		
+		          res.close();
+		          consulta.close();
+		          conex.desconectar();
+		    
+		  } catch (Exception e) {
+			  
+		   System.out.print("No s'ha pogut fer el llistat");
+		  }
+		  
+		  return id;
+			
+			
+		}
+	
+	public int retornaIdAssign(String nom){
+		
+		
+		int id=0;
+		
+		//connexio amb la bd
+	  DbConnection conex= new DbConnection();
+	     
+	  try {
+		  
+	   PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT idAssignatures FROM assignatures WHERE nom='" + nom + "';");
+	   
+	   ResultSet res = consulta.executeQuery();
+	   
+	   
+	   		id=((Integer.parseInt(res.getString("idAssignatures"))));
+	   		
+	          res.close();
+	          consulta.close();
+	          conex.desconectar();
+	    
+	  } catch (Exception e) {
+		  
+	   System.out.print("No s'ha pogut fer el llistat");
+	  }
+	  
+	  return id;
+		
+		
 	}
 
 }

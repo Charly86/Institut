@@ -32,7 +32,7 @@ Escull una opcio
 
 <li> <a href="afegirAsignatura.jsp">Afegir assignatures</a>
 
-<li> <a href="ferMatricula.jsp">Fer matricula</a>
+<li> <a href="matricularAssignatura.jsp">Fer matricula</a>
 
 <li> <a href="llistarAlumnes.jsp">Llistar Alumnes</a>
 
