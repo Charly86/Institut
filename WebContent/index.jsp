@@ -16,7 +16,7 @@
 			<table>
 			<tr>
 			<td>Usuari:</td>
-			<td><input type="text" size="20" name="user"></td>
+			<td><input type="text" size="20" name="nomUser"></td>
 			</tr>
 			<tr>
 			<td>Password:</td>
@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 			<td>Edat:</td>
-			<td><input type="text" size="20" name="edad"></td>
+			<td><input type="text" size="20" name="edat"></td>
 			</tr>
 			
 			<td colspan="2" align="center"><input type="submit" value="Registrar"></td>
@@ -47,7 +47,7 @@
 		<tr>
 		<td>
 		
-		<form action="pagUsuari" method="Post">
+		<form action="comprovarUsuari" method="Post">
 			<table>
 			<tr>
 			<td>Usuari:</td>

@@ -20,22 +20,31 @@ public class AlumneDao implements IAlumne {
 		
 		AlumneVo a= Factory.factoryMethod(user,password,nom,cognoms,edat);
 		
-		//crear connexio
-		DbConnection conex= new DbConnection();
-		  try {
-			  //Preparar connexio
-		   Statement estatuto = conex.getConnection().createStatement();
-		   
-		   //executar consulta
-		   estatuto.executeUpdate("INSERT INTO alumnes (nomUser, password, Nom, Cognom, Edat) VALUES ('"+a.getNomUser()+"', '"+a.getPassword()+"', '" +a.getNom()+"', "+a.getCognoms()+", '" + a.getEdat()+ "');");
-		   System.out.println("T'has registrat correctament");
-		   estatuto.close();
-		   conex.desconectar();
-		    
-		  } catch (SQLException e) {
-		            System.out.println(e.getMessage());
-		            System.out.println("Connexio incorrecta");
-		  }
+		if(this.buscarAlumne(a.getNomUser())!=null){
+			
+			//crear connexio
+			DbConnection conex= new DbConnection();
+			  try {
+				  //Preparar connexio
+			   Statement estatuto = conex.getConnection().createStatement();
+			   
+			   //executar consulta
+			   estatuto.executeUpdate("INSERT INTO alumnes (nomUser, password, Nom, Cognoms, Edat) VALUES ('"+a.getNomUser()+"', '"+a.getPassword()+"', '" +a.getNom()+"', '"+a.getCognoms()+"', '" + a.getEdat()+ "');");
+			   
+			   estatuto.close();
+			   conex.desconectar();
+			    
+			  } catch (SQLException e) {
+			            System.out.println(e.getMessage());
+			            System.out.println("Connexio incorrecta");
+			  }
+			
+		}
+		else{
+			System.out.println("L'alumne ja existeix");
+			
+		}
+		
 	}
 	
 	public void CrearAssignatura(String nom, int credits){

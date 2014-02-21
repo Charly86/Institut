@@ -7,21 +7,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import vo.AlumneVo;
 import dao.AlumneDao;
 
-
 /**
- * Servlet implementation class ServletRegistre
+ * Servlet implementation class ComprovarUsuari
  */
-@WebServlet("/ServletRegistre")
-public class ServletRegistre extends HttpServlet {
+@WebServlet("/ComprovarUsuari")
+public class ComprovarUsuari extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletRegistre() {
+    public ComprovarUsuari() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,20 +39,32 @@ public class ServletRegistre extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String nomUser=request.getParameter("nomUser");
-		String password=request.getParameter("password");
-		String nom=request.getParameter("nom");
-		String edat2=request.getParameter("edat");
-		int edat=Integer.parseInt(edat2);
-		String cognoms=request.getParameter("cognoms");
+		String nom = "";
 		
-	
+		String password = "";
 		
-		AlumneDao alum = new AlumneDao();
+		if (request.getParameter("user") != null){
 		
-		alum.CrearAlumne(nomUser, password, nom, cognoms, edat);
+		nom = request.getParameter("user");
+		}
+		if (request.getParameter("password") != null){
 		
-		response.sendRedirect("localhost:8080/Escola/index.jsp");
+		password = request.getParameter("password");
+		
+		}
+		
+			AlumneDao alum = new AlumneDao();
+		
+			if(alum.buscarAlumne(nom)!=null){
+				
+				AlumneVo a=alum.buscarAlumne(nom);
+				
+				HttpSession sesionOk = request.getSession();
+				
+				sesionOk.setAttribute("nom",a.getNomUser());
+				
+				response.sendRedirect("pagUsuari");
+			}
 	}
 
 }
